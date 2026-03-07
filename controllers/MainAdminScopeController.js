@@ -5,4 +5,7 @@ adminApp.run(function($rootScope,$location){
         }
     return $location.path().startsWith(route);
 }
+ $rootScope.logOut = function () {
+    localStorage.removeItem("currentUser");
+    window.location.replace("index.html");  };
 })
