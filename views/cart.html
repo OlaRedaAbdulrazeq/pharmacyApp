@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+  </head>
+  <body>
+    <style>
+      body {
+        background: #f8f9fa;
+      }
+      .cart-item {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .quantity-btn {
+        background: rgba(0, 113, 188, 0.055);
+        border: none;
+        border-radius: 5px;
+        padding: 2px 10px;
+        color: rgb(0, 113, 188);
+        font-size: 18px;
+      }
+      .quantity-input {
+        width: 40px;
+        text-align: center;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        padding: 2px;
+      }
+      .remove-btn {
+        color: #dc3545;
+        cursor: pointer;
+      }
+      .summary-card {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+    </style>
+
+    <div class="container my-5">
+      <div ng-if="cartItems.length === 0" class="text-center py-5">
+        <i class="bi bi-cart-x" style="font-size: 60px; color: #ccc"></i>
+        <h4 class="mt-3">Your cart is empty</h4>
+        <p class="text-muted">Add some products to get started!</p>
+        <a
+          href="#!/products"
+          class="btn text-white mt-2"
+          style="background-color: rgb(0, 113, 188)"
+          >Shop Now</a
+        >
+      </div>
+
+      <div ng-if="cartItems.length > 0">
+        <div class="row g-4">
+          <div class="col-lg-7">
+            <div ng-repeat="item in cartItems" class="cart-item">
+              <div class="row align-items-center">
+                <div class="col-md-2">
+                  <img
+                    ng-src="{{item.image}}"
+                    class="img-fluid"
+                    style="max-height: 80px; object-fit: contain"
+                  />
+                </div>
+
+                <div class="col-md-4">
+                  <h6 class="mb-0">{{item.name}}</h6>
+                  <small class="text-muted">{{item.category}}</small>
+                </div>
+
+                <div class="col-md-2">
+                  <strong style="color: rgb(0, 113, 188)"
+                    >{{item.price}} EGP</strong
+                  >
+                </div>
+
+                <div class="col-md-3">
+                  <div class="d-flex align-items-center">
+                    <button class="quantity-btn" ng-click="decreaseQty(item)">
+                      -
+                    </button>
+                    <input
+                      type="text"
+                      class="quantity-input mx-2"
+                      ng-model="item.qty"
+                      readonly
+                    />
+                    <button class="quantity-btn" ng-click="increaseQty(item)">
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                <div class="col-md-1 text-end">
+                  <i
+                    class="bi bi-trash remove-btn fs-5"
+                    ng-click="removeItem(item.id)"
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="summary-card">
+              <h5 class="text-center mb-3">Order Summary</h5>
+
+              <div class="d-flex justify-content-between mb-2">
+                <span>Subtotal</span>
+                <strong>{{getTotal()}} EGP</strong>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span>Shipping</span>
+                <strong>Free</strong>
+              </div>
+              <hr />
+              <div class="d-flex justify-content-between mb-3">
+                <span>Total</span>
+                <strong style="color: rgb(0, 113, 188); font-size: 18px"
+                  >{{getTotal()}} EGP</strong
+                >
+              </div>
+
+              <p ng-if="orderSuccess" class="text-success text-center">
+                Order placed successfully!
+              </p>
+              <p ng-if="orderError" class="text-danger text-center">
+                {{orderError}}
+              </p>
+
+              <button
+                ng-click="placeOrder()"
+                class="btn w-100 text-white"
+                style="background-color: rgb(0, 113, 188)"
+              >
+                <i class="bi bi-lock-fill me-1"></i> Place Order
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
