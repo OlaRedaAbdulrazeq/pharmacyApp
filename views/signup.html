@@ -8,82 +8,113 @@
       rel="stylesheet"
     />
   </head>
+
   <body>
     <div class="row g-0" style="min-height: 100%">
-      <div class="col-md-6">
+      
+      <!-- Image (hidden on small screens) -->
+      <div class="col-md-6 d-none d-md-block">
         <img
           src="https://images.pexels.com/photos/5214953/pexels-photo-5214953.jpeg"
           style="width: 100%; height: 100vh; object-fit: cover"
         />
       </div>
 
-      <div class="col-md-6 d-flex align-items-center justify-content-center">
-        <div style="width: 75%">
-          <h3 class="text-center mb-5">
-            <span style="color: rgb(0, 113, 188); font-weight: bold"
-              >PHARMA</span
-            ><span>CARE</span>
+      <!-- Form -->
+      <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+        <div style="width: 75%; min-height: 100vh">
+
+          <h3 class="text-center mb-5 mt-5">
+            <span style="color: rgb(0, 113, 188); font-weight: bold">PHARMA</span>
+            <span>CARE</span>
           </h3>
 
           <div class="card p-5" style="width: 100%; border-radius: 15px">
             <h3 class="text-center mb-1">Welcome !</h3>
             <p class="text-muted text-center mb-4"></p>
+
             <form name="signupForm">
-            <label>Name</label>
-            <input
-              ng-model="name"
-              name="name"
-              type="text"
-              class="form-control"
-              placeholder="Enter your name"
-              required
-              pattern="^[A-Za-z ]+$"
-            />
-            <p ng-show="signupForm.name.$error.required &&signupForm.name.$touched" class="text-danger" style="font-size: 12px">Required Field</p>
-            <p ng-show="signupForm.name.$error.pattern &&signupForm.name.$dirty" class="text-danger" style="font-size: 12px">Only strings separated by spaces are allowed</p>
-            <label>Email</label>
-            <input
-              ng-model="email"
-              name="email"
-               ng-blur="checkEmail()"
-              type="email"
-              class="form-control"
-              placeholder="Enter your email"
-              required
-            />
-            <p class="text-danger" ng-show="signupForm.email.$error.required &&signupForm.email.$touched" style="font-size: 12px">Required Field</p>
-            <p class="text-danger"  ng-show="signupForm.email.$error.email && signupForm.email.$touched" style="font-size: 12px">Invalid email format</p>
-            <p class="text-danger"  ng-if="emailExists" style="font-size: 12px">Email already Exists</p>
 
-            <label class="mt-2">Password</label>
-            <input
-              ng-model="password"
-              name="password"
-              type="password"
-              class="form-control"
-              placeholder="Enter your password"
-              required
-              ng-minlength="6"
-            />
-            <p class="text-danger" ng-show="signupForm.password.$error.required &&signupForm.password.$touched" style="font-size: 12px">Required field</p>
-            <p class="text-danger" ng-show="signupForm.password.$error.minlength &&signupForm.password.$touched" style="font-size: 12px">Password must be at last 6 characters</p>
+              <label>Name</label>
+              <input
+                ng-model="name"
+                name="name"
+                type="text"
+                class="form-control"
+                placeholder="Enter your name"
+                required
+                pattern="^[A-Za-z ]+$"
+              />
+              <p ng-show="signupForm.name.$error.required && signupForm.name.$touched" class="text-danger" style="font-size: 12px">
+                Required Field
+              </p>
+              <p ng-show="signupForm.name.$error.pattern && signupForm.name.$dirty" class="text-danger" style="font-size: 12px">
+                Only strings separated by spaces are allowed
+              </p>
 
-            <label class="mt-2">Confirm Password</label>
-            <input
-              ng-model="Confirmpassword"
-              name="Confirmpassword"
-              type="password"
-              class="form-control"
-              placeholder="Re-Enter your password"
-              required
-            />
-            <p ng-show="signupForm.Confirmpassword.$error.required && signupForm.Confirmpassword.$touched " class="text-danger" style="font-size: 12px">Required Field</p>
-            <p ng-if="(Confirmpassword !== password) && signupForm.Confirmpassword.$dirty" class="text-danger" style="font-size: 12px">Unmatched Passwords</p>
+              <label>Email</label>
+              <input
+                ng-model="email"
+                name="email"
+                ng-blur="checkEmail()"
+                type="email"
+                class="form-control"
+                placeholder="Enter your email"
+                required
+              />
+              <p class="text-danger" ng-show="signupForm.email.$error.required && signupForm.email.$touched" style="font-size: 12px">
+                Required Field
+              </p>
+              <p class="text-danger" ng-show="signupForm.email.$error.email && signupForm.email.$touched" style="font-size: 12px">
+                Invalid email format
+              </p>
+              <p class="text-danger" ng-if="emailExists" style="font-size: 12px">
+                Email already Exists
+              </p>
 
-            <button ng-disabled="emailExists ||signupForm.$invalid" ng-click="signup()" class="btn w-100 mt-3" style="background-color: rgb(0, 113, 188); color: white">
-              Register
-            </button>
-          </form>  
+              <label class="mt-2">Password</label>
+              <input
+                ng-model="password"
+                name="password"
+                type="password"
+                class="form-control"
+                placeholder="Enter your password"
+                required
+                ng-minlength="6"
+              />
+              <p class="text-danger" ng-show="signupForm.password.$error.required && signupForm.password.$touched" style="font-size: 12px">
+                Required field
+              </p>
+              <p class="text-danger" ng-show="signupForm.password.$error.minlength && signupForm.password.$touched" style="font-size: 12px">
+                Password must be at last 6 characters
+              </p>
+
+              <label class="mt-2">Confirm Password</label>
+              <input
+                ng-model="Confirmpassword"
+                name="Confirmpassword"
+                type="password"
+                class="form-control"
+                placeholder="Re-Enter your password"
+                required
+              />
+              <p ng-show="signupForm.Confirmpassword.$error.required && signupForm.Confirmpassword.$touched" class="text-danger" style="font-size: 12px">
+                Required Field
+              </p>
+              <p ng-if="(Confirmpassword !== password) && signupForm.Confirmpassword.$dirty" class="text-danger" style="font-size: 12px">
+                Unmatched Passwords
+              </p>
+
+              <button
+                ng-disabled="emailExists || signupForm.$invalid"
+                ng-click="signup()"
+                class="btn w-100 mt-3"
+                style="background-color: rgb(0, 113, 188); color: white"
+              >
+                Register
+              </button>
+
+            </form>
           </div>
         </div>
       </div>

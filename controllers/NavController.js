@@ -6,6 +6,9 @@ app.controller("NavController", function ($scope, $location, CartService) {
   $scope.isLoginPage = function () {
     return $location.path() === "/login";
   };
+  $scope.isSignupPage = function () {
+    return $location.path() === "/signup";
+  };
   $scope.logout = function () {
     localStorage.removeItem("currentUser");
     $scope.currentUser = {};
