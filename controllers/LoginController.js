@@ -28,7 +28,8 @@ app.controller(
           let user = res.data[0];
           localStorage.setItem("currentUser", JSON.stringify(user));
           if (user.role === "admin") {
-            $location.path("adminPanel");
+            // $location.path("adminPanel");
+            window.location.replace("adminPanel.html");
           } else {
             $location.path("/home");
           }
