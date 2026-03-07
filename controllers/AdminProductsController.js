@@ -44,4 +44,10 @@ adminApp.controller("AdminProductsController",function($scope,$location,adminSer
     $scope.sortLow=function(){
         $scope.sortField='price'
     }
+    $scope.sortStockHigh=function(){
+        $scope.sortField='-quantity'
+    }
+    $scope.sortStockLow=function(){
+        $scope.sortField='quantity'
+    }
 })
