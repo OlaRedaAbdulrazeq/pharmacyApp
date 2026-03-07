@@ -1,0 +1,70 @@
+
+<form class="mb-1 shadow rounded search-input" role="search">
+    <input class="form-control py-2" type="search" placeholder="Search By Name" aria-label="Search By Name" ng-model="input">
+</form>
+<div class="overflow-scroll  p-2 pt-0  mb-3 show-product">
+    <table class="table shadow rounded" ng-hide="products.length===0" >
+    <tr class="position-sticky top-0 head-row" ng-hide="isLoading">
+        <td>
+            <b class="mb-2">Name</b>
+        </td>
+        <td><b>Description</b></td>
+        <td>
+            <div class="d-flex  align-items-center">
+                <b class="pe-2">Price</b>
+                <div style="cursor:pointer">
+                    <i class="bi bi-chevron-down small" type="button" data-bs-toggle="dropdown"></i>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item" ng-click="sortHigh()">High - Low</li>
+                        <li class="dropdown-item" ng-click="sortLow()">Low - High</li>
+                    </ul>
+                </div>
+            </div>
+        </td>
+        <td><b>Stock</b></td>
+        <td><b>Actions</b></td>
+    </tr>
+    <tbody>
+        <div ng-show="isLoading" class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+            <div class="spinner-border text-blue" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <tr ng-repeat="item in filteredProducts = (products | filter:{name: input , deleted: false ,expired:false} | orderBy:sortField) ">
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.price | currency}}</td>
+            <td>{{item.quantity}}</td>
+            <td>
+                <i class="bi bi-pencil-square text-blue pe-4" style="cursor:pointer" ng-click="editItem(item)"></i>
+                <i data-bs-toggle="modal"  data-bs-target="#confirmDeleteModal" class="bi bi-trash3 text-dark" ng-click="prepareDelete(item)" style="cursor:pointer"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p class="text-center fs-5 pt-3" ng-if="filteredProducts.length===0">No Matching Result</p>
+<p ng-if="products.length===0" class="text-center pt-5 fs-1">No Products Found</p>
+<div class="d-flex mb-md-5 add-btn">
+    <button class="btn btn-primary bg-blue p-2 ms-auto me-5 mt-4 position-absolute bottom-0 end-0 mb-4  px-3 " ng-click='goToNewProduct()'><i class="bi bi-plus-lg"></i></button>
+</div>
+</div>
+<!-- Modal for deleting a book-->
+        <div class="modal fade" id="confirmDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you Sure you want to delete <b>{{itemToDelete.name}}!</b>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary bg-blue" ng-click="deleteItem(itemToDelete.id)">Delete</button>
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    
+
