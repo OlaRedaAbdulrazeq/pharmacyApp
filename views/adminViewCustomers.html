@@ -1,7 +1,7 @@
 <form class="mb-1 shadow rounded search-input" role="search">
     <input class="form-control py-2" type="search" placeholder="Search By Name" aria-label="Search By Name" ng-model="input">
 </form>
-<div class="accordion" id="customersAccordion" ng-hide="showAllCustomers.length===0" ng-hide="isLoading">
+<div class="accordion overflow-scroll" id="customersAccordion" ng-hide="showAllCustomers.length===0" ng-hide="isLoading" style="height: 80vh">
   <div class="accordion-item" ng-repeat="customer in showFilteredCustomers=(showAllCustomers | filter:{name:input})">
     <h2 class="accordion-header" id="heading{{$index}}">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$index}}" aria-expanded="false" aria-controls="collapse{{$index}}">
@@ -11,7 +11,6 @@
 
     <div id="collapse{{$index}}" class="accordion-collapse collapse" aria-labelledby="heading{{$index}}" data-bs-parent="#customersAccordion">
       <div class="accordion-body">
-
         <div ng-repeat="order in customer.orders">
           <table class="table">
             <thead>
