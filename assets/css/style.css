@@ -1,0 +1,60 @@
+/* OLAAAAAAA */
+.side-nav span.active-link,
+.side-nav span:hover {
+    background-color: rgb(0, 113, 188);
+}
+
+.side-nav span.active-link a,
+.side-nav span.active-link i,
+.side-nav span:hover a,
+.side-nav span:hover i {
+    color: white !important;
+}
+.bg-blue{
+    background-color:#0071bc;
+}
+.text-blue{
+    color:rgb(0, 113, 188);
+}
+
+/* --------------------- */
+@media (min-width: 768px) {
+    aside{
+        height: 88vh; 
+    }
+    form.add-form{
+        height:80vh;
+    }
+    div.show-product{
+        height: 73vh;
+    }
+}
+@media (max-width: 767px) {
+    .add-btn {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        z-index: 1000;
+    }
+    aside {
+        position: sticky;
+        top: 3px; 
+        overflow-x: auto;
+    }
+   
+    
+    .side-nav {
+        display: flex;
+        flex-direction: row; 
+        overflow-x: auto; 
+    }
+    
+    .side-nav a {
+        white-space: nowrap; 
+    }
+    .search-input{
+        position: sticky;
+        top: 5rem; 
+        z-index: 100; 
+    } 
+}
