@@ -1,0 +1,35 @@
+var adminApp = angular.module("adminApp",["ngRoute"]);
+adminApp.config(function($routeProvider){
+    $routeProvider
+    .when('/',{
+        templateUrl:'views/adminDashboard.html',
+        controller:'AdminDashboardController'
+    })
+    $routeProvider
+    .when('/customers',{
+        templateUrl:'views/adminViewCustomers.html',
+        controller:'AdminViewCustomersController'
+    })
+    .when('/products',{
+        templateUrl:'views/adminProducts.html',
+        controller:'AdminProductsController'
+    })
+    .when('/products/add-item',{
+        templateUrl:'views/adminAddItems.html',
+        controller:'AdminAddProductController'
+    })
+    $routeProvider
+    .when('/orders',{
+        templateUrl:'views/AdminViewOrders.html',
+        controller:'AdminViewOrdersController'
+    })
+    .when('/purchases',{
+        templateUrl:'views/adminViewPurchases.html',
+        controller:'AdminViewPurchasesController'
+    })
+    .when('/outofstock',{
+        templateUrl:'views/adminViewOutOfStock.html',
+        controller:'AdminOutOfStockController'
+    })
+    .otherwise('/')
+})
