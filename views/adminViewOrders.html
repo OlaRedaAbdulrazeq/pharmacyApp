@@ -1,0 +1,42 @@
+<form class="mb-1 shadow rounded search-input" role="search">
+    <input class="form-control py-2" type="search" placeholder="Search By Name" aria-label="Search By Name" ng-model="input">
+</form>
+<div class="overflow-scroll  p-2 pt-0  mb-3 show-product">
+    <table class="table shadow rounded" ng-hide="orders.length===0">
+        <tr class="position-sticky top-0 head-row" ng-hide="isLoading">
+            <th>Customer Name</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <div ng-show="isLoading" class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+            <div class="spinner-border text-blue" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <tr ng-repeat="order in filterOrders =(orders| filter:{customers:{name: input}} | orderBy:'-date')">
+            <td>{{order.customers.name}}</td>
+            <td>{{order.date | date}}</td>
+            <td>{{order.total | currency}}</td>
+            <td>
+                <select ng-model="order.status" class="form-select" ng-disabled="order.originalState === 'returned'">
+                    <option value="pending">Pending</option>
+                    <option value="out for delivery">Out For Delivery</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="returned" ng-click="returnOrder(order)">Returned</option>
+                </select>
+            </td>
+            <td><button class="btn btn-primary bg-blue" ng-disabled="order.originalState===order.status" ng-click="modifyStatus(order)" ng-if="order.originalState !== 'returned'">Apply</button></td>
+        </tr>
+    </table>
+</div>
+
+<p ng-show="filterOrders.length===0" class="text-center fs-5 pt-3">No Matching Result</p>
+<p ng-if="orders.length===0" class="text-center pt-5 fs-1">Nothing in Orders </p>
+<div class="alert alert-success position-absolute top-0 end-0 p-3" role="alert" ng-show="showUpdateAlert">
+        {{alert}}
+</div>
+<div class="alert alert-danger position-absolute top-0 end-0 p-3" role="alert" ng-show="showErrorAlert">
+        {{alert}}
+</div>
