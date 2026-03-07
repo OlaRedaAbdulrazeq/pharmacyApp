@@ -1,0 +1,27 @@
+<form class="mb-1 shadow rounded search-input" role="search">
+    <input class="form-control py-2" type="search" placeholder="Search By Name" aria-label="Search By Name" ng-model="input">
+</form>
+<div class="overflow-scroll  p-2 pt-0  mb-3 show-product" ng-hide="isLoading">
+    <table class="table shadow rounded" ng-hide="outOfStock.length===0">
+        <tr class="position-sticky top-0 head-row" >
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Category</th>
+        </tr>
+       
+        <tr ng-repeat="product in filteredOutOfStock=(outOfStock | filter: {name: input})">
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.category}}</td>
+        </tr>
+    </table>
+<p class="text-center fs-5 pt-3" ng-if="filteredOutOfStock.length===0">No Matching Result</p>
+<p ng-if="outOfStock.length===0" class="text-center pt-5 fs-1">Nothing is Out Of Stock </p>
+</div>
+
+        <div ng-show="isLoading" class="d-flex justify-content-center align-items-center" style="height: 60vh;">
+            <div class="spinner-border text-blue" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>    
+        
