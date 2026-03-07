@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="container my-5">
-      <div class="d-flex align-items-center mb-2">
+      <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
         <button
           class="btn me-2 px-3"
           ng-click="setCategory('All')"
@@ -51,7 +51,9 @@
           BabyCare
         </button>
 
-        <div class="ms-auto d-flex align-items-center">
+        <div
+          class="d-flex align-items-center gap-2 mt-2 mt-md-0 ms-md-auto w-100 w-md-auto"
+        >
           <input
             type="search"
             ng-model="search"
@@ -60,7 +62,8 @@
               border: 1px solid #e0e0e0;
               border-radius: 8px;
               padding: 6px 12px;
-              width: 350px;
+              width: 100%;
+              max-width: 350px;
               margin-right: 10px;
             "
           />
