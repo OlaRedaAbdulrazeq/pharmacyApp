@@ -1,0 +1,65 @@
+
+<form name="productForm" class="bg-white shadow p-4 rounded add-form col-11 col-md-10 col-lg-9 mx-auto" role="form" novalidate>
+  <div class="row gy-4 pt-4">
+    <div class="col-12 col-md-6">
+      <label for="productName" class="form-label">Name</label>
+      <input type="text" class="form-control" name="name" id="productName" ng-model="name" required>
+      <span class="small text-danger" ng-show="productForm.name.$invalid && productForm.name.$touched">Required Field</span>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label for="productDescription" class="form-label">Description</label>
+      <input type="text" class="form-control" id="productDescription" name="description" ng-model="description" required>
+      <span class="small text-danger" ng-show="productForm.description.$error.required && productForm.description.$touched">Required Field</span>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label for="productPrice" class="form-label">Price</label>
+      <input type="number" name="price" class="form-control" id="productPrice" ng-model="price" min="0" required>
+      <span class="small text-danger" ng-show="productForm.price.$error.required && productForm.price.$touched">Required Field</span>
+      <span class="small text-danger" ng-show="productForm.price.$error.min && productForm.price.$touched">Only positive numbers are allowed</span>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <label for="productQuantity" class="form-label">Quantity</label>
+      <input type="number" class="form-control" id="productQuantity" name="quantity" ng-model="quantity" min="0" required>
+      <span class="small text-danger" ng-show="productForm.quantity.$error.required && productForm.quantity.$touched">Required Field</span>
+      <span class="small text-danger" ng-show="productForm.quantity.$error.min && productForm.quantity.$touched">Only positive numbers are allowed</span>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <select class="form-select"  ng-model="category" required>
+        <option value="" disabled>Select Category</option>
+        <option value="SkinCare">Skin Care</option>
+        <option value="BabyCare">Baby Care</option>
+        <option value="Medicine">Medicine</option>
+        <option value="Cosmetics">Cosmetics</option>
+      </select>
+      <span class="small text-danger" ng-show="productForm.category.$error.required && productForm.category.$touched">Required field</span>
+    </div>
+
+    <div class="col-12 col-md-6 d-flex flex-column">
+      <input type="file" class="form-control flex-grow-1 " name="img" file-reader ng-model="imgUrl" id="productImg" required>
+       <div ng-if="imgUrl" class="flex-shrink-0 mt-2">
+        <img ng-src="{{imgUrl}}" class="" style="width:80px; height:80px; object-fit:cover;">
+      </div>
+      <span class="small text-danger" ng-show="productForm.img.$error.required && productForm.img.$touched">Required Field</span>
+    </div>
+
+    <div class="col-12 d-flex justify-content-center gap-2 mt-4">
+      <button class="btn btn-primary bg-blue" ng-click="submit()" ng-disabled="productForm.$invalid" ng-hide="showEdit">Save Details</button>
+      <button class="btn btn-primary bg-blue" ng-click="edit()" ng-disabled="productForm.$invalid" ng-show="showEdit">Update Product</button>
+      <button class="btn btn-dark" ng-click="cancel()">Cancel</button>
+    </div>
+  </div>
+</form>
+
+<div class="alert alert-success position-absolute top-0 end-0 p-3" role="alert" ng-show="showAlert">
+  {{alert}}
+</div>
+<div class="alert alert-success position-absolute top-0 end-0 p-3" role="alert" ng-show="showUpdateAlert">
+  {{alert}}
+</div>
+<div class="alert alert-danger position-absolute top-0 end-0 p-3" role="alert" ng-show="showErrorAlert">
+  {{alert}}
+</div>
