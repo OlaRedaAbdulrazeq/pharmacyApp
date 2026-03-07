@@ -1,6 +1,6 @@
 app.controller(
   "ProductsController",
-  function ($scope, $routeOarams, PharmacyService, CartService) {
+  function ($scope, PharmacyService, CartService) {
     $scope.allProducts = [];
     $scope.filteredProducts = [];
     $scope.selectedCategory = "All";
