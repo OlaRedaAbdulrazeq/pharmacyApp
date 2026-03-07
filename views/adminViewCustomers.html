@@ -1,0 +1,49 @@
+<form class="mb-1 shadow rounded search-input" role="search">
+    <input class="form-control py-2" type="search" placeholder="Search By Name" aria-label="Search By Name" ng-model="input">
+</form>
+<div class="accordion" id="customersAccordion" ng-hide="showAllCustomers.length===0" ng-hide="isLoading">
+  <div class="accordion-item" ng-repeat="customer in showFilteredCustomers=(showAllCustomers | filter:{name:input})">
+    <h2 class="accordion-header" id="heading{{$index}}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$index}}" aria-expanded="false" aria-controls="collapse{{$index}}">
+        <span class="text-blue">Customer</span> : {{customer.name}}
+      </button>
+    </h2>
+
+    <div id="collapse{{$index}}" class="accordion-collapse collapse" aria-labelledby="heading{{$index}}" data-bs-parent="#customersAccordion">
+      <div class="accordion-body">
+
+        <div ng-repeat="order in customer.orders">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="purchase in order.purchases">
+                <td>{{order.date | date}}</td>
+                <td>{{purchase.products.name}}</td>
+                <td>{{purchase.quantity}}</td>
+                <td>{{purchase.price}}</td>
+                <td>{{order.status}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h5 class="text-end text-blue">Total: {{order.total | currency}}</h5>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="text-center fs-5 pt-3" ng-if="showFilteredCustomers.length===0">No Matching Result</p>
+  <p ng-if="showAllCustomers.length===0" class="text-center pt-5 fs-1">No Customers To show</p>
+</div>
+<div ng-show="isLoading" class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+            <div class="spinner-border text-blue" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
