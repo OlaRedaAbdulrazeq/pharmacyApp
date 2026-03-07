@@ -21,6 +21,12 @@ app.service("PharmacyService", function ($http) {
       config,
     );
   };
+  this.checkEmail=function(email){
+    return $http.get(API_URL + "?email=eq." + email,config);
+  }
+  this.registerUser=function(user){
+    return $http.post(API_URL,user,config)
+  }
   this.getProducts = function () {
     return $http.get(
       PRODUCTS_URL + "?select=id,category,description,price,imgUrl&limit=12",
