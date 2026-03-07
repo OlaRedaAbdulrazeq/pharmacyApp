@@ -1,0 +1,176 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <div class="container my-5">
+      <div class="d-flex align-items-center mb-2">
+        <button
+          class="btn me-2 px-3"
+          ng-click="setCategory('All')"
+          ng-style="{'background-color': selectedCategory === 'All' ? 'rgb(0,113,188)' : 'rgba(0,113,188,0.055)', 'color': selectedCategory === 'All' ? 'white' : 'rgb(0,113,188)'}"
+        >
+          All
+        </button>
+        <button
+          class="btn me-2 px-3"
+          ng-click="setCategory('Medicine')"
+          ng-style="{'background-color': selectedCategory === 'Medicine' ? 'rgb(0,113,188)' : 'rgba(0,113,188,0.055)', 'color': selectedCategory === 'Medicine' ? 'white' : 'rgb(0,113,188)'}"
+        >
+          Medicine
+        </button>
+        <button
+          class="btn me-2 px-3"
+          ng-click="setCategory('Cosmetics')"
+          ng-style="{'background-color': selectedCategory === 'Cosmetics' ? 'rgb(0,113,188)' : 'rgba(0,113,188,0.055)', 'color': selectedCategory === 'Cosmetics' ? 'white' : 'rgb(0,113,188)'}"
+        >
+          Cosmetics
+        </button>
+        <button
+          class="btn me-2 px-3"
+          ng-click="setCategory('SkinCare')"
+          ng-style="{'background-color': selectedCategory === 'SkinCare' ? 'rgb(0,113,188)' : 'rgba(0,113,188,0.055)', 'color': selectedCategory === 'SkinCare' ? 'white' : 'rgb(0,113,188)'}"
+        >
+          SkinCare
+        </button>
+        <button
+          class="btn me-2 px-3"
+          ng-click="setCategory('BabyCare')"
+          ng-style="{'background-color': selectedCategory === 'BabyCare' ? 'rgb(0,113,188)' : 'rgba(0,113,188,0.055)', 'color': selectedCategory === 'BabyCare' ? 'white' : 'rgb(0,113,188)'}"
+        >
+          BabyCare
+        </button>
+
+        <div class="ms-auto d-flex align-items-center">
+          <input
+            type="search"
+            ng-model="search"
+            placeholder="Search for products"
+            style="
+              border: 1px solid #e0e0e0;
+              border-radius: 8px;
+              padding: 6px 12px;
+              width: 350px;
+              margin-right: 10px;
+            "
+          />
+          <select ng-model="sortOrder" class="form-select" style="width: 180px">
+            <option value="">Default</option>
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <h2 class="fw-bold mt-5 mb-2">
+          {{selectedCategory === 'All' ? 'All Products' : selectedCategory}}
+        </h2>
+        <div
+          ng-repeat="product in filteredProducts | filter:{description:search} | orderBy:'price':(sortOrder === 'desc')"
+          class="col-md-3"
+        >
+          <div
+            class="card"
+            style="
+              border-radius: 15px;
+              border: 0.8px solid;
+              border-color: rgba(0, 113, 188, 0.055);
+              overflow: hidden;
+              height: 320px;
+            "
+          >
+            <div
+              style="
+                height: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #fff;
+                padding: 10px;
+              "
+            >
+              <img
+                ng-src="{{product.imgUrl}}"
+                class="img-fluid"
+                style="max-height: 80%; object-fit: contain"
+              />
+            </div>
+            <div class="card-body py-2 px-3">
+              <small style="color: rgb(0, 113, 188)"
+                >{{product.category}}</small
+              >
+              <p
+                class="mb-1"
+                style="
+                  overflow: hidden;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 1;
+                  -webkit-box-orient: vertical;
+                "
+              >
+                {{product.description}}
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <h6 class="fw-bold mb-0" style="color: rgb(0, 113, 188)">
+                  {{product.price}} EGP
+                </h6>
+                <div ng-if="!getQty(product.id)">
+                  <button
+                    ng-click="addToCart(product)"
+                    class="btn"
+                    style="
+                      background-color: rgb(0, 113, 188);
+                      color: white;
+                      padding: 1px 5px;
+                    "
+                  >
+                    <i class="bi bi-plus"></i>
+                  </button>
+                </div>
+                <div
+                  ng-if="getQty(product.id)"
+                  class="d-flex align-items-center"
+                >
+                  <button
+                    ng-click="decrease(product)"
+                    class="btn"
+                    style="
+                      background-color: rgba(0, 113, 188, 0.055);
+                      color: rgb(0, 113, 188);
+                      padding: 1px 6px;
+                    "
+                  >
+                    -
+                  </button>
+                  <span class="mx-1">{{getQty(product.id)}}</span>
+                  <button
+                    ng-click="increase(product)"
+                    class="btn"
+                    style="
+                      background-color: rgba(0, 113, 188, 0.055);
+                      color: rgb(0, 113, 188);
+                      padding: 1px 6px;
+                    "
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
