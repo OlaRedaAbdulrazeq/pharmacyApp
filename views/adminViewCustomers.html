@@ -43,6 +43,6 @@
     </div>
 
   </div>
-  <p class="text-center fs-5 pt-3" ng-if="showFilteredCustomers.length===0">No Matching Result</p>
+  <p class="text-center fs-5 pt-3" ng-if="showFilteredCustomers.length===0" ng-hide="showAllCustomers.length===0">No Matching Result</p>
   <p ng-if="showAllCustomers.length===0" class="text-center pt-5 fs-1">No Customers To show</p>
 </div>

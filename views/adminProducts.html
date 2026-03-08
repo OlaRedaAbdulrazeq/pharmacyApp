@@ -54,7 +54,7 @@
     </tbody>
 </table>
 
-<p class="text-center fs-5 pt-3" ng-if="filteredProducts.length===0">No Matching Result</p>
+<p class="text-center fs-5 pt-3" ng-if="filteredProducts.length===0" ng-hide="products.length===0">No Matching Result</p>
 <p ng-if="products.length===0" class="text-center pt-5 fs-1">No Products Found</p>
 <div class="d-flex mb-md-5 add-btn">
     <button class="btn btn-primary bg-blue p-2 ms-auto me-5 mt-4 position-absolute bottom-0 end-0 mb-4  px-3 " ng-click='goToNewProduct()'><i class="bi bi-plus-lg"></i></button>

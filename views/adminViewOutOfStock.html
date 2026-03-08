@@ -15,7 +15,7 @@
             <td>{{product.category}}</td>
         </tr>
     </table>
-<p class="text-center fs-5 pt-3" ng-if="filteredOutOfStock.length===0">No Matching Result</p>
+<p class="text-center fs-5 pt-3" ng-if="filteredOutOfStock.length===0" ng-hide="outOfStock.length===0">No Matching Result</p>
 <p ng-if="outOfStock.length===0" class="text-center pt-5 fs-1">Nothing is Out Of Stock </p>
 </div>
 
